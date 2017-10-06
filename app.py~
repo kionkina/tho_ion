@@ -20,15 +20,16 @@ app.secret_key = os.urandom(32)
 #Root Route: 
 @app.route("/", methods = ['GET', 'POST'])
 def hello():
-    retry = False    #user made no errors yet
+
+    #adds user to the session
     if request.method == 'POST':
+
         if request.form['pass'] == the_passwd and request.form['username'] == the_user: # If the username and password match...
-            session['user'] = request.form['username'] ## Add user to the session 
+            session['user'] = request.form['username'] ## Add username to the session 
+            name = request.form['username']
             return redirect(url_for('ur_in')) ## redirect to the welcome page 
-        else:
-            retry = True # ensures that an error message shows up
-    return render_template('landing.html', retry = retry) # display error and allow user to retry
     
+    return render_template('landing.html') # If the username/password don't match, redirect to the landing page. 
 
 
 @app.route('/logged_in')
@@ -40,7 +41,6 @@ def ur_in():
 def logout():
     session.pop('user',None) ## Remove user from the session
     return "You're logged out." 
-
 
 if __name__=="__main__":
     app.debug = True

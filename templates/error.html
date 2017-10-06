@@ -5,10 +5,9 @@
 <body>
 <center>
 
-{% if retry %}
+{{% if retry %}}
 <b> Your username/password was incorrect. Try again. </b>
-{% endif %}
-
+{{% endif %}}
 <form method = "POST" >
 <input type ="text" name = "username" placeholder="USERNAME" size="35">
 <input type = "text" name = "pass" placeholder="PASSWORD" size="35">
